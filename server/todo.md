@@ -1,0 +1,11 @@
+- learn to implement HTTPS (DONE)
+- assign player id (DONE)
+- rooms
+    - broadcast player id to room
+- chat functionality
+- canvas streaming
+- hover actions streaming 
+
+--- 80% ---
+- Coolify integration
+- deploy

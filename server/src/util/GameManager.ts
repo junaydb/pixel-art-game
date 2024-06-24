@@ -2,7 +2,7 @@ export class GameManager {
   static uniqueId: number = 0;
 
   room: string;
-  maxPlayers: number = 2; // TODO: change this to an 'opts' object when more options are added
+  maxPlayers: number = 4; // TODO: change this to an 'opts' object when more options are added
   currentPlayerCount: number = 1;
 
   // should not be called directly

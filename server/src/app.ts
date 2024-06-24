@@ -6,10 +6,11 @@ import { readFileSync } from "node:fs";
 import { Server } from "socket.io";
 import { getParentDir } from "./util/helpers";
 import { TypedServer } from "./util/types";
-import * as socketHandler from "./util/socket-handlers";
+import { SockerHandler } from "./util/SocketHandler";
 
-const PORT = process.env.PORT || 3000;
 const app = express();
+const port = process.env.PORT || 3000;
+const socketHandler = new SockerHandler(true);
 const server = createServer(
   {
     key: readFileSync(join(getParentDir(__dirname), "ssl/localhost-key.pem")),
@@ -28,13 +29,11 @@ app.use(morgan("tiny"));
 app.use(express.static("build"));
 
 io.on("connection", (socket) => {
-  socketHandler.init(socket, true);
-
-  socket.on("disconnect", () => socketHandler.disconnect(socket, true));
-
-  socket.on("joinGame", (nickname) => socketHandler.joinGame(nickname, socket, true));
+  socketHandler.init(socket);
+  socket.on("disconnect", () => socketHandler.disconnect(socket));
+  socket.on("joinGame", (nickname) => socketHandler.joinGame(nickname, socket));
 });
 
-server.listen(PORT, () => {
-  console.log(`server running at https://localhost:${PORT}`);
+server.listen(port, () => {
+  console.log(`server running at https://localhost:${port}`);
 });

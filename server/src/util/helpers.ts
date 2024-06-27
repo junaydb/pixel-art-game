@@ -1,4 +1,4 @@
-import { SocketData } from "@/shared/socketio-types";
+import type { SocketData } from "@/shared/socketio-types";
 
 export function getParentDir(path: string) {
   const dirs = path.split("/");
@@ -13,9 +13,9 @@ const WHITE = "\u001b[37m";
 export function socketLog(
   data: SocketData,
   msg: string,
-  colour?: "red" | "green" | "yellow"
+  colour?: "red" | "green" | "yellow",
 ) {
-  let activeColour;
+  let activeColour: string;
   let hasNickname = false;
   if (data.nickname) hasNickname = true;
 
@@ -35,10 +35,12 @@ export function socketLog(
 
   if (hasNickname) {
     console.log(
-      `WebSocket[${data.id}] (${data.nickname}): ${activeColour}${msg}${WHITE}`
+      `WebSocket[${data.id}] (${data.nickname}): ${activeColour}${msg}${WHITE}`,
     );
   } else {
-    console.log(`WebSocket[${data.id}] (no nickname): ${activeColour}${msg}${WHITE}`);
+    console.log(
+      `WebSocket[${data.id}] (no nickname): ${activeColour}${msg}${WHITE}`,
+    );
   }
 }
 

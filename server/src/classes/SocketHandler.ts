@@ -1,20 +1,20 @@
-import { ServerSocket } from "./types";
+import { randInRange, socketLog } from "../util/helpers";
+import type { ServerSocket } from "../util/types";
 import { GameManager } from "./GameManager";
-import { socketLog, randInRange } from "./helpers";
 
-export class SockerHandler {
-  static instance: SockerHandler;
+export class SocketHandler {
+  static instance: SocketHandler;
 
-  uniqueId: number = 0;
+  uniqueId = 0;
   log: boolean;
   joinableGames: GameManager[] = [];
 
   constructor(log?: boolean) {
     this.log = Boolean(log);
-    if (!SockerHandler.instance) {
-      SockerHandler.instance = this;
+    if (!SocketHandler.instance) {
+      SocketHandler.instance = this;
     }
-    return SockerHandler.instance;
+    return SocketHandler.instance;
   }
 
   init(socket: ServerSocket) {
@@ -30,14 +30,18 @@ export class SockerHandler {
 
     let game: GameManager;
 
-    if (this.joinableGames.length == 0) {
+    if (this.joinableGames.length === 0) {
       game = GameManager.createGame();
 
       socket.join(game.room);
       socket.data.game = game;
       this.joinableGames.push(game);
       if (this.log) {
-        socketLog(socket.data, `game ${socket.data.game.room} created`, "green");
+        socketLog(
+          socket.data,
+          `game ${socket.data.game.room} created`,
+          "green",
+        );
       }
     } else {
       // randomly select a game from the joinable games, then join it
@@ -46,7 +50,8 @@ export class SockerHandler {
 
       socket.join(game.room);
       socket.data.game = game;
-      if (this.log) socketLog(socket.data, `joined ${socket.data.game.room}`, "green");
+      if (this.log)
+        socketLog(socket.data, `joined ${socket.data.game.room}`, "green");
 
       // tell all sockets in this game that this socket has joined
       socket.to(socket.data.game.room).emit("playerJoined", socket.data.id);
@@ -59,7 +64,11 @@ export class SockerHandler {
           elem.room !== game.room;
         });
         if (this.log) {
-          socketLog(socket.data, `${socket.data.game.room} no longer joinable`, "yellow");
+          socketLog(
+            socket.data,
+            `${socket.data.game.room} no longer joinable`,
+            "yellow",
+          );
         }
       }
     }
@@ -69,7 +78,7 @@ export class SockerHandler {
     if (this.log) socketLog(socket.data, "disconnected", "red");
     if (!socket.data.game) return;
 
-    let game = socket.data.game;
+    const game = socket.data.game;
 
     // if this game was full, add it back to the joinable games
     if (game.isFull()) {
@@ -87,7 +96,11 @@ export class SockerHandler {
         elem.room !== game.room;
       });
       if (this.log) {
-        socketLog(socket.data, `game ${socket.data.game.room} was destroyed`, "yellow");
+        socketLog(
+          socket.data,
+          `game ${socket.data.game.room} was destroyed`,
+          "yellow",
+        );
       }
     } else {
       // tell the sockets still in this game that this socket has disconnected

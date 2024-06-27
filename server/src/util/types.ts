@@ -1,10 +1,10 @@
-import { Server, Socket } from "socket.io";
-import {
+import type {
   ClientToServerEvents,
-  ServerToClientEvents,
   InterServerEvents,
+  ServerToClientEvents,
   SocketData,
 } from "@/shared/socketio-types";
+import type { Server, Socket } from "socket.io";
 
 export type ServerSocket = Socket<
   ClientToServerEvents,

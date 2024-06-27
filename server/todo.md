@@ -1,7 +1,7 @@
 - learn to implement HTTPS (DONE)
 - assign player id (DONE)
-- rooms
-    - broadcast player id to room
+- rooms (DONE)
+    - broadcast player id to room (DONE)
 - chat functionality
 - canvas streaming
 - hover actions streaming 

@@ -6,7 +6,7 @@ export default function Chat() {
   return (
     <div className="flex flex-col">
       {chat.map((msg, i) =>
-        i % 2 == 0 ? (
+        i % 2 === 0 ? (
           <p key={i} className="p-1 bg-gray-300">
             {msg}
           </p>

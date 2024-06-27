@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { useChatUpdate } from "@/providers/ChatProvider";
-import { useWord } from "@/providers/WordProvider";
 import { useScores, useSetScores } from "@/providers/ScoresProvider";
+import { useWord } from "@/providers/WordProvider";
+import { useState } from "react";
 
 export default function ChatInput() {
   const [input, setInput] = useState("");

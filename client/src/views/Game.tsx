@@ -1,7 +1,7 @@
-import PixelCanvas from "@/components/PixelCanvas";
-import Scoreboard from "@/components/Scoreboard";
 import Chat from "@/components/Chat";
 import ChatInput from "@/components/ChatInput";
+import PixelCanvas from "@/components/PixelCanvas";
+import Scoreboard from "@/components/Scoreboard";
 import ToolButton from "@/components/ToolButton";
 
 export default function Game() {

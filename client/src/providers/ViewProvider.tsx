@@ -1,27 +1,29 @@
-import { useState, useContext, createContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 type Views = "LOBBY" | "GAME";
-type setView = (view: Views) => void;
+type SetView = (view: Views) => void;
 
-const viewContext = createContext<Views>("LOBBY");
-const setViewContext = createContext<setView>(() => {});
+const ViewContext = createContext<Views>("LOBBY");
+const SetViewContext = createContext<SetView>(() => {});
 
 export function useView() {
-  return useContext(viewContext);
+  return useContext(ViewContext);
 }
 export function useSetView() {
-  return useContext(setViewContext);
+  return useContext(SetViewContext);
 }
 
-export default function ViewProvider({ children }: { children: React.ReactNode }) {
+export default function ViewProvider({
+  children,
+}: { children: React.ReactNode }) {
   const [view, setView] = useState<Views>("LOBBY");
 
   // prettier-ignore
   return (
-    <viewContext.Provider value={view}>
-      <setViewContext.Provider value={setView}>
+    <ViewContext.Provider value={view}>
+      <SetViewContext.Provider value={setView}>
         {children}
-      </setViewContext.Provider>
-    </viewContext.Provider>
+      </SetViewContext.Provider>
+    </ViewContext.Provider>
   );
 }

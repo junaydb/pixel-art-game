@@ -1,7 +1,8 @@
 --- client socket logic ---
 - send nickname to server (DONE)
-- search for and join game room
+- search for and join game room (DONE)
 - send chat to server socket
+- send canvas data to server socket
 
 --- game logic ---
 - tools (see pixel painters wiki for ref) 

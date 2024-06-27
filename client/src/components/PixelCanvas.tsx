@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 type Vec2 = {
   x: number;
@@ -6,7 +6,9 @@ type Vec2 = {
 };
 
 export default function PixelCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(
+    null as unknown as HTMLCanvasElement,
+  );
   const isDrawingRef = useRef(false);
   const mousePosRef = useRef<Vec2>({ x: 0, y: 0 });
   const prevMousePosRef = useRef<Vec2>({ x: 0, y: 0 });
@@ -17,9 +19,11 @@ export default function PixelCanvas() {
   ) as React.MutableRefObject<CanvasRenderingContext2D>;
 
   useEffect(() => {
-    let context = canvasRef.current!.getContext("2d") as CanvasRenderingContext2D;
+    const context = canvasRef.current.getContext(
+      "2d",
+    ) as CanvasRenderingContext2D;
     contextRef.current = context;
-  }, []);
+  }, [contextRef]);
 
   function startDrawing(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
     if (e.button !== 0) return;
@@ -29,7 +33,7 @@ export default function PixelCanvas() {
   }
 
   function draw() {
-    let line = {
+    const line = {
       start: getCanvasSpaceMousePos(mousePosRef.current),
       end: getCanvasSpaceMousePos(prevMousePosRef.current),
     };
@@ -43,7 +47,12 @@ export default function PixelCanvas() {
   }
 
   function bresenhamLine(x0: number, x1: number, y0: number, y1: number) {
-    let dx, dy, sx, sy, error, e2;
+    let dx: number;
+    let dy: number;
+    let sx: number;
+    let sy: number;
+    let error: number;
+    let e2: number;
 
     dx = Math.abs(x1 - x0);
     sx = x0 < x1 ? 1 : -1;
@@ -69,13 +78,13 @@ export default function PixelCanvas() {
   }
 
   function getCanvasSpaceMousePos(pos: Vec2) {
-    let rect = canvasRef.current!.getBoundingClientRect();
+    const rect = canvasRef.current.getBoundingClientRect();
 
-    let scaleX = canvasRef.current!.width / rect.width;
-    let scaleY = canvasRef.current!.height / rect.height;
+    const scaleX = canvasRef.current.width / rect.width;
+    const scaleY = canvasRef.current.height / rect.height;
 
-    let adjustedX = (pos.x - rect.left) * scaleX;
-    let adjustedY = (pos.y - rect.top) * scaleY;
+    const adjustedX = (pos.x - rect.left) * scaleX;
+    const adjustedY = (pos.y - rect.top) * scaleY;
 
     return {
       x: Math.floor(adjustedX / pixelScaleRef.current),
@@ -110,6 +119,6 @@ export default function PixelCanvas() {
       onMouseMove={updateMousePos}
       onMouseUp={stopDrawing}
       onMouseLeave={stopDrawing}
-    ></canvas>
+    />
   );
 }

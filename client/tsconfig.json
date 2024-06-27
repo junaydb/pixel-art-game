@@ -25,9 +25,9 @@
 
     /* Import path alias */
     "baseUrl": ".",
-    "paths": { 
-      "@/*": ["./src/*"], 
-      "@/shared/*": ["../shared/*"] 
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/shared/*": ["../shared/*"]
     }
   },
   "include": ["src"],

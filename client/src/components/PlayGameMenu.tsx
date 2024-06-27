@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useSocket } from "@/providers/SocketProvider";
 import { useSetView } from "@/providers/ViewProvider";
 import { joinGame } from "@/socket/socket-handlers";
-import { useSocket } from "@/providers/SocketProvider";
+import { useState } from "react";
 
 export default function PlayGameMenu() {
   const [input, setInput] = useState("");

@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 type SetWord = (word: string) => void;
 
@@ -12,7 +12,9 @@ export function useSetWord() {
   return useContext(SetWordContext);
 }
 
-export default function WordProvider({ children }: { children: React.ReactNode }) {
+export default function WordProvider({
+  children,
+}: { children: React.ReactNode }) {
   const [word, setWord] = useState("pixlio");
 
   // prettier-ignore

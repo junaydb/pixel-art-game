@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { useSocket } from "./SocketProvider";
 
 type UpdateChat = (chat: string) => void;
@@ -13,7 +13,9 @@ export function useChatUpdate() {
   return useContext(SetChatContext);
 }
 
-export default function ChatProvider({ children }: { children: React.ReactNode }) {
+export default function ChatProvider({
+  children,
+}: { children: React.ReactNode }) {
   const socket = useSocket();
   const [chat, setChat] = useState<string[]>([]);
 
@@ -22,11 +24,10 @@ export default function ChatProvider({ children }: { children: React.ReactNode }
     setChat([...chat, newMsg]);
   }
 
-  // prettier-ignore
   return (
     <ChatContext.Provider value={chat}>
       <SetChatContext.Provider value={updateChat}>
-            {children}
+        {children}
       </SetChatContext.Provider>
     </ChatContext.Provider>
   );

@@ -3,8 +3,10 @@ import ScoresProvider from "./ScoresProvider";
 import SocketProvider from "./SocketProvider";
 import WordProvider from "./WordProvider";
 
-export default function GlobalProvider({ children }: { children: React.ReactNode }) {
-  // prettier-ignore
+export default function GlobalProvider({
+  children,
+}: { children: React.ReactNode }) {
+  // biome-ignore format:
   return (
     <SocketProvider>
       <WordProvider>

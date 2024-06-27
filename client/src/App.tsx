@@ -1,8 +1,8 @@
 import "./index.css";
 import GlobalProvider from "./providers/GlobalProvider";
-import Lobby from "./views/Lobby";
-import Game from "./views/Game";
 import { useView } from "./providers/ViewProvider";
+import Game from "./views/Game";
+import Lobby from "./views/Lobby";
 
 export default function App() {
   const view = useView();

@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 type PlayerScore = { id: number; playerName: string; score: number };
 type UpdateScores = (scores: PlayerScore[]) => void;
@@ -24,7 +24,7 @@ export default function ScoresProvider({
   return (
     <ScoreContext.Provider value={score}>
       <SetScoreContext.Provider value={setScore}>
-            {children}
+        {children}
       </SetScoreContext.Provider>
     </ScoreContext.Provider>
   );

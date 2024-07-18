@@ -4,9 +4,10 @@ import type {
   ServerToClientEvents,
   SocketData,
 } from "@/shared/socketio-types";
-import type { Server, Socket } from "socket.io";
+import type { Server, Socket as SSocket } from "socket.io";
+import type { Socket as CSocket } from "socket.io-client";
 
-export type ServerSocket = Socket<
+export type ServerSocket = SSocket<
   ClientToServerEvents,
   ServerToClientEvents,
   InterServerEvents,
@@ -19,3 +20,5 @@ export type TypedServer = Server<
   InterServerEvents,
   SocketData
 >;
+
+export type ClientSocket = CSocket<ServerToClientEvents, ClientToServerEvents>;

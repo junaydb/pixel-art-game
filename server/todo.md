@@ -1,11 +1,4 @@
-- learn to implement HTTPS (DONE)
-- assign player id (DONE)
-- rooms (DONE)
-    - broadcast player id to room (DONE)
-- chat functionality
-- canvas streaming
-- hover actions streaming 
-
---- 80% ---
-- Coolify integration
-- deploy
+[ ] fetch words from database (google sheets API?) OR read file from disk with periodic refresh
+[ ] Coolify integration
+[ ] HTTPS
+[ ] deploy

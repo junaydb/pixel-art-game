@@ -1,13 +1,14 @@
 {
-  "name": "pixlio-server",
+  "name": "pixel-art-game-server",
   "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/app.ts",
+    "test": "jest --verbose --silent --runInBand --detectOpenHandles",
+    "testWrite": "pnpm test --no-color 2>output.txt",
     "build": "tsc",
-    "prod": "node dist/server/src/app.js",
     "clean": "rm -rf dist",
     "format": "npx @biomejs/biome format --write ./src",
     "check": "npx @biomejs/biome check --write ./src"
@@ -19,15 +20,22 @@
     "@biomejs/biome": "^1.8.2",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.14.2",
+    "jest": "^29.7.0",
+    "socket.io-client": "^4.7.5",
+    "ts-jest": "^29.2.0",
     "tsx": "^4.15.5",
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "chokidar": "^3.6.0",
     "cors": "^2.8.5",
+    "ejs": "^3.1.10",
     "express": "^4.19.2",
     "morgan": "^1.10.0",
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.7.5",
+    "unique-names-generator": "^4.7.1"
   }
 }
